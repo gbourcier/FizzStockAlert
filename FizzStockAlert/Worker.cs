@@ -43,16 +43,15 @@ namespace FizzStockAlert
                 {
                     _logger.LogDebug($"Refreshing page :  {_appSettings.Target}.");
                     _chromeDriver.Navigate().Refresh();
+                    await Task.Delay(10000, stoppingToken);
                     IWebElement? oosElement = _chromeDriver.FindElementSafe(By.Id("edit-out-of-stock"));
 
                     if (oosElement is null)
                     {
                         _logger.LogInformation($"Phone is possibly in stock. Emailing {_appSettings.ToEmail}.");
                         _emailService.SendSuccessEmail(_appSettings.ToEmail);
-                        await Task.Delay(300000, stoppingToken);
+                        await Task.Delay(900000, stoppingToken);
                     }
-
-                    await Task.Delay(10000, stoppingToken);
 
                 }
                 catch (Exception e)
