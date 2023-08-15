@@ -9,7 +9,9 @@ services:
     networks:
       - app-network
   fizzstockalert:
-    image: gmelz/fizzstockalert
+    build:
+        context: .
+        dockerfile: FizzStockAlert/Dockerfile
     restart: always
     depends_on:
       - chrome
