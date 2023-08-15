@@ -1,6 +1,6 @@
 # Fizz Phone Stock Alert System
 
-This project is a simple application that monitors the availability of a specific phone on the Fizz website and sends email alerts if the phone becomes available. It utilizes Docker Compose, a worker service, Selenium, and email notifications.
+This project is a simple application that monitors the availability of a specific phone on Fizz (or any other web store, really) website and sends email alerts if the item becomes available. It utilizes Docker Compose, a worker service, Selenium, and email notifications.
 
 ## Table of Contents
 
@@ -14,8 +14,8 @@ This project is a simple application that monitors the availability of a specifi
 
 ## Features
 
-- Monitors the availability of a specific phone on the Fizz website.
-- Sends email notifications if the phone becomes available.
+- Monitors the availability of a specific phone on e-commerce websites.
+- Sends email notifications if the item becomes available.
 - Provides crash notifications via email if the worker service fails.
 
 ## Prerequisites
@@ -44,19 +44,27 @@ Edit the appsettings.json file to set your specific configuration parameters:
 
 {
   "Logging": {
-    // ...
+    "LogLevel": {
+      "Default": "Debug",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
   },
   "Configuration": {
-    "SMTPHost": "email-smtp.us-east-1.amazonaws.com",
-    "SMTPUser": "your-smtp-username",
-    "SMTPPassword": "your-smtp-password",
-    "SMTPFromEmail": "your-email@example.com",
-    "SMTPPort": 587,
-    "Target": "https://fizz.ca/en/product/URLToProductThatYouWantToMonitor",
-    "ToEmail": [ "recipient1@example.com", "recipient2@example.com", ... ]
+    "SMTPHost": "smtp.host.com",
+    "SMTPUser": "username,
+    "SMTPPassword": "password",
+    "SMTPFromEmail": "from@gmail.com",
+    "SMTPPort": 1234,
+    "Target": "https://someitem.someonlinestore.com",
+    "ToEmail": [ "to@gmail.com" ],
+    "OOSElementSpanText": "Out of Stock",
+    "SMTPEmailBody": "Some email body",
+    "SMTPEmailSubject" :  "Some email subject"
   }
 }
 
+OOSElementSpanText will be monitored by the service every 5-10 secondes. Typically, this would represent a button that would normally says "Add to cart" but says "Out of stock". In order to find what to use exactly, you should use the inspect tool from your browser. The exact selenium call is the following : IWebElement? oosElement = _chromeDriver.FindElementSafe(By.XPath($"//span[text()='{_appSettings.OOSElementSpanText}']"));
+If the Out of stock element is null, the system will assume that the item is in stock and it will trigger an email notification.
 
 ## Usage
 The worker service will periodically make requests to the Fizz website to check if the specific phone is in stock. If the phone is available, email notifications will be sent to the specified recipients. If the worker service crashes, crash notifications will also be sent via email.
