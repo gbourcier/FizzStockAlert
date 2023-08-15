@@ -40,7 +40,7 @@ Before you begin, ensure you have the following installed:
 
 ## Configuration
 
-Edit the appsettings.json file to set your specific configuration parameters:
+Create (under FizzStockAlert/appsettings.json) and edit the appsettings.json file to set your specific configuration parameters:
 
 {
   "Logging": {
