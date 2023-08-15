@@ -38,9 +38,9 @@ namespace FizzStockAlert.Services
             }
             
 
-            mail.Subject = "Phone might be in stock";
+            mail.Subject = _appSettings.SMTPEmailSubject;
 
-            mail.Body = $"Check {_appSettings.Target}";
+            mail.Body = _appSettings.SMTPEmailBody;
 
             smtpClient.Send(mail);
         }

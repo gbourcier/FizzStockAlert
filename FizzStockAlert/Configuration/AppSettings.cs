@@ -16,5 +16,7 @@ namespace FizzStockAlert.Configuration
         public string Target { get; set; } = string.Empty;
         public string[] ToEmail { get; set; } = Array.Empty<string>();
         public string OOSElementSpanText { get; set;} = string.Empty;
+        public string SMTPEmailBody { get; set; } = string.Empty;
+        public string SMTPEmailSubject { set; get; } = string.Empty;
     }
 }
