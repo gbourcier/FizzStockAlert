@@ -44,7 +44,7 @@ namespace FizzStockAlert
                     _logger.LogDebug($"Refreshing page :  {_appSettings.Target}.");
                     _chromeDriver.Navigate().Refresh();
                     await Task.Delay(10000, stoppingToken);
-                    IWebElement? oosElement = _chromeDriver.FindElementSafe(By.Id("edit-out-of-stock"));
+                    IWebElement? oosElement = _chromeDriver.FindElementSafe(By.XPath($"//span[text()='{_appSettings.OOSElementSpanText}']"));
 
                     if (oosElement is null)
                     {

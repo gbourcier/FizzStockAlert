@@ -15,5 +15,6 @@ namespace FizzStockAlert.Configuration
         public int SMTPPort{ get; set; }
         public string Target { get; set; } = string.Empty;
         public string[] ToEmail { get; set; } = Array.Empty<string>();
+        public string OOSElementSpanText { get; set;} = string.Empty;
     }
 }
